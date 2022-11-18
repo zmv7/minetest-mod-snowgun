@@ -48,6 +48,7 @@ core.register_tool("snowgun:snowgun", {
 			end
 			reload(name)
 			inv:remove_item("main", "default:snow "..amount)
+			itemstack:add_wear(256)
 		end
 		local pos = player:get_pos()
 		local dir = player:get_look_dir()
