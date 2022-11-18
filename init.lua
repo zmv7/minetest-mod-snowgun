@@ -91,7 +91,8 @@ snowflake.on_step = function(self, dtime, moveresult)
 		self.object:remove()
 	end
 	if moveresult.collides then
-		if not core.is_protected(pos, self["owner"]) then
+		local node = core.get_node_or_nil(pos)
+		if not core.is_protected(pos, self["owner"]) and (not node or (node and node.name == "air") or (node and core.registered_nodes[node.name] and core.registered_nodes[node.name].buildable_to)) then
 			core.add_node(pos, {name="default:snow",param2=0})
 			core.check_for_falling(pos)
 		end
