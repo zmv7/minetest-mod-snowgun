@@ -24,6 +24,7 @@ core.register_chatcommand("snowgun", {
 	if meta then
 		meta:set_int("amount",amount)
 		meta:set_string("count_meta",param)
+		meta:set_string("description","Snowgun\nUses "..amount.." default:snow")
 		player:set_wielded_item(witem)
 		return true, "Snowflakes amount set to "..param
 	end
@@ -31,7 +32,7 @@ end})
 
 core.register_tool("snowgun:snowgun", {
   wield_scale = {x=1,y=1,z=2},
-  description = "Snowgun\nUses 3x default:snow",
+  description = "Snowgun\nUses 30 default:snow",
   inventory_image = "snowgun.png",
   on_use = function(itemstack, player, pointed_thing)
 	local name = player:get_player_name()
@@ -39,15 +40,14 @@ core.register_tool("snowgun:snowgun", {
 	local inv = player:get_inventory()
 	local meta = itemstack:get_meta()
 	local amount = meta:get("amount") or 30
-	local needed = math.ceil(amount / 10) or 1
-	if inv:contains_item("main", "default:snow "..needed) or creative then
+	if inv:contains_item("main", "default:snow "..amount) or creative then
 		if not creative then
 			if reloading[name] then
 				core.chat_send_player(name, "Snowgun is reloading")
 				return
 			end
 			reload(name)
-			inv:remove_item("main", "default:snow "..needed)
+			inv:remove_item("main", "default:snow "..amount)
 		end
 		local pos = player:get_pos()
 		local dir = player:get_look_dir()
