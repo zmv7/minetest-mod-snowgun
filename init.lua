@@ -58,7 +58,7 @@ core.register_tool("snowgun:snowgun", {
 			for i=1, amount do
 				local obj = core.add_entity(pos, "snowgun:snowflake", name)
 				if obj then
-					obj:set_velocity({x=dir.x * 20 + math.random() + math.random(-3,3), y=dir.y * 20 + math.random() + math.random(-3,3), z=dir.z * 20 + math.random() + math.random(-3,3)})
+					obj:set_velocity({x=dir.x * 20 + math.random() + math.random(-amount/10,amount/10), y=dir.y * 20 + math.random() + math.random(-amount/10,amount/10), z=dir.z * 20 + math.random() + math.random(-amount/10,amount/10)})
 					obj:set_acceleration({x=0, y=-5, z=0})
 				end
 			end
